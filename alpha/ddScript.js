@@ -1,4 +1,7 @@
 
+let divSwap = {first : '', second: ''}
+
+
 let newElDD = function(elData){
     let newEl = document.createElement(elData.type);
     elData.class.map(function(item){
@@ -8,18 +11,20 @@ let newElDD = function(elData){
     if(elData.evt){newEl.addEventListener(elData.evt.type, elData.evt.func)}
     if(elData.srce){newEl.src = elData.srce};
     if(elData.bgImage){newEl.style.backgroundImage="url('imgs/" + elData.bgImage + "')"};
+    if(elData.val){newEl.value = elData.val};
     if(elData.drg){
         newEl.draggable = 'true';
-        newEl.ondragstart = elData.drgStart};
+        newEl.ondragstart = elData.drgStart;
         newEl.ondrop = elData.drgDrop;
         newEl.ondragover = elData.drgOver;
+    }
     document.querySelector(elData.append).appendChild(newEl);
 };
 
 
 let creListItem = function(itemData){
     let newLi = [
-        {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.contain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop},
+        {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.contain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop, val: itemData.val},
         {type: 'div', class: ['listItemImgCon', 'listItemImgCon' + itemData.name], append: '.listItemCon' + itemData.name},
         {type: 'div', class: ['listItemImg', 'listItemImg' + itemData.name], append: '.listItemImgCon' + itemData.name, bgImage: itemData.img},
         {type: 'div', class: ['listItemTextCon', 'listItemTextCon' + itemData.name], append: '.listItemCon' + itemData.name},
@@ -32,28 +37,68 @@ let creListItem = function(itemData){
 }
 
 let creListItemData = [
-    {name: 'LttP', img: 'ba-lttp.jpg', title: 'Link to the Past', cons: 'SNES', year: '1991'},
-    {name: 'OoT', img: 'ba-oot.jpg', title: 'Ocarina of Time', cons: 'Nintendo 64', year: '1998'},
-    {name: 'MM', img: 'ba-mm.jpg', title: "Majora's Mask", cons: 'Nintendo 64', year: '2000'},
-    {name: 'WW', img: 'ba-ww.jpg', title: "Wind Waker", cons: 'Gamecube', year: '2002'},
-    {name: 'TP', img: 'ba-tp.jpg', title: "Twilight Princess", cons: 'Gamecube/Wii', year: '2006'},
-    {name: 'SS', img: 'ba-ss.jpg', title: "Skyward Sword", cons: 'Wii', year: '2011'},
-    {name: 'BotW', img: 'ba-botw.jpeg', title: "Breath of the Wild", cons: 'Wii U/Switch', year: '2017'}
+    {name: 'LttP', img: 'ba-lttp.jpg', title: 'Link to the Past', cons: 'SNES', year: '1991', val: 1},
+    {name: 'OoT', img: 'ba-oot.jpg', title: 'Ocarina of Time', cons: 'Nintendo 64', year: '1998', val: 2},
+    {name: 'MM', img: 'ba-mm.jpg', title: "Majora's Mask", cons: 'Nintendo 64', year: '2000', val: 3},
+    {name: 'WW', img: 'ba-ww.jpg', title: "Wind Waker", cons: 'Gamecube', year: '2002', val: 4},
+    {name: 'TP', img: 'ba-tp.jpg', title: "Twilight Princess", cons: 'Gamecube/Wii', year: '2006', val: 5},
+    {name: 'SS', img: 'ba-ss.jpg', title: "Skyward Sword", cons: 'Wii', year: '2011', val: 6},
+    {name: 'BotW', img: 'ba-botw.jpeg', title: "Breath of the Wild", cons: 'Wii U/Switch', year: '2017', val: 7}
 ]
 
 function mouseDiv(e){
-    e.dataTransfer.setData('text', e.target.classList[1]);
-    console.log(e.target.classList[1])
+    e.dataTransfer.setData('text', e.target);
+    divSwap.first = e.target.value;
 }
 
 function allowDrop(e){
     e.preventDefault();
-    console.log('umm?')
 }
 
 function drgDropper(e){
     var data = e.dataTransfer.getData("text");
-    e.target.appendChild(document.querySelector('.'+data));
+    let selDiv = e.target;
+    while(selDiv.classList[0] != 'listItemCon'){
+        selDiv = selDiv.parentElement;
+    }
+    divSwap.second = selDiv.value;
+    reorganizeDivs();
+}
+
+function reorganizeDivs(){
+    let swappingDivs = []
+    creListItemData.map(function(item){
+        if(item.val == divSwap.first || item.val == divSwap.second){
+            let newObj = {};
+            newObj.name = item.name; newObj.img = item.img; newObj.title = item.title; 
+            newObj.cons = item.cons, newObj.year = item.year, newObj.val = item.val;
+            swappingDivs.push(newObj);
+        }
+    })
+    creListItemData.map(function(item1, index1){
+        swappingDivs.map(function(item2, index2){
+            if(item1.name == item2.name){
+                console.log(item2.name, index1, index2);
+                if(index2 == 1){
+                    creListItemData[index1] = swappingDivs[0]
+                }else{
+                    creListItemData[index1] = swappingDivs[1]
+                }
+            }
+        })
+    })
+    divSwap.first = '';
+    divSwap.second = '';
+    document.querySelector('.contain').innerHTML = '';
+    listItemElementData = [];
+    creListItemData.map(function(item){
+        creListItem(item);
+    })
+    listItemElementData.map(function(item){
+        item.map(function(item2){
+            newElDD(item2);
+        })
+    })
 }
 
 let listItemElementData = [];

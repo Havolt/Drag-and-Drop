@@ -18,7 +18,7 @@ body{
 
 .listItemCon{
     border: 2px solid green;
-    width: 320px;
+    width: 340px;
     padding: 16px;
     user-select: none;
     margin: 4px 0;
@@ -48,7 +48,7 @@ body{
 .listItemTextCon{
     display: inline-block;
     vertical-align: top;
-    width: 220px;
+    width: 240px;
 }
 
 .listItemTitle{
