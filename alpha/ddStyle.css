@@ -45,6 +45,16 @@ body{
     border: 1px solid green;
 }
 
+.listItemImgOoT{
+    background-size: 150%;
+    background-position-x: -15px;
+}
+
+.listItemImgMM{
+    background-size: 150%;
+    background-position-x: -20px;
+}
+
 .listItemTextCon{
     display: inline-block;
     vertical-align: top;
@@ -68,4 +78,8 @@ body{
 
 .listItemYear{
     float: right;
+}
+
+.ddHidden{
+    opacity: 0.0;
 }

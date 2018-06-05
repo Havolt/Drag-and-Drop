@@ -1,5 +1,5 @@
 
-let divSwap = {first : '', second: ''}
+let divSwap = {first : '', second: '', originalDiv : ''}
 
 
 let newElDD = function(elData){
@@ -17,6 +17,7 @@ let newElDD = function(elData){
         newEl.ondragstart = elData.drgStart;
         newEl.ondrop = elData.drgDrop;
         newEl.ondragover = elData.drgOver;
+        newEl.ondragend = elData.drgEnd
     }
     document.querySelector(elData.append).appendChild(newEl);
 };
@@ -24,7 +25,8 @@ let newElDD = function(elData){
 
 let creListItem = function(itemData){
     let newLi = [
-        {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.contain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop, val: itemData.val},
+        {type: 'div', class: ['listItem', 'listItem'+itemData.name], append: '.contain'},
+        {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.contain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop, drgEnd: drgEnder, val: itemData.val},
         {type: 'div', class: ['listItemImgCon', 'listItemImgCon' + itemData.name], append: '.listItemCon' + itemData.name},
         {type: 'div', class: ['listItemImg', 'listItemImg' + itemData.name], append: '.listItemImgCon' + itemData.name, bgImage: itemData.img},
         {type: 'div', class: ['listItemTextCon', 'listItemTextCon' + itemData.name], append: '.listItemCon' + itemData.name},
@@ -49,10 +51,18 @@ let creListItemData = [
 function mouseDiv(e){
     e.dataTransfer.setData('text', e.target);
     divSwap.first = e.target.value;
+    divSwap.originalDiv = e.target;
+    e.target.style.background = 'gold';
 }
 
 function allowDrop(e){
     e.preventDefault();
+}
+
+function drgEnder(){
+    if(divSwap.originalDiv){
+        divSwap.originalDiv.style.backgroundColor = 'white';
+    }
 }
 
 function drgDropper(e){
@@ -62,6 +72,12 @@ function drgDropper(e){
         selDiv = selDiv.parentElement;
     }
     divSwap.second = selDiv.value;
+    if(divSwap.first == divSwap.second){
+        divSwap.first = '';
+        divSwap.second = '';
+        divSwap.originalDiv = '';
+        return;
+    }
     reorganizeDivs();
 }
 
@@ -78,7 +94,6 @@ function reorganizeDivs(){
     creListItemData.map(function(item1, index1){
         swappingDivs.map(function(item2, index2){
             if(item1.name == item2.name){
-                console.log(item2.name, index1, index2);
                 if(index2 == 1){
                     creListItemData[index1] = swappingDivs[0]
                 }else{
@@ -89,6 +104,7 @@ function reorganizeDivs(){
     })
     divSwap.first = '';
     divSwap.second = '';
+    divSwap.originalDiv = '';
     document.querySelector('.contain').innerHTML = '';
     listItemElementData = [];
     creListItemData.map(function(item){
