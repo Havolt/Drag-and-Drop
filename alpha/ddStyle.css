@@ -1,6 +1,7 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background: #f7f7f7;
 }
 
 .ddApp{
@@ -10,6 +11,9 @@ body{
 .contain{
     margin: 0 auto;
     display: inline-block;
+    border: blue 2px solid;
+    padding: 6px;
+    background: #88b2f7;
 }
 
 .listItemCon{
@@ -17,6 +21,12 @@ body{
     width: 320px;
     padding: 16px;
     user-select: none;
+    margin: 4px 0;
+    background: white;
+}
+
+.listItemCon:hover{
+    cursor: pointer;
 }
 
 .listItemImgCon{
