@@ -18,6 +18,7 @@ let newElDD = function(elData){
         newEl.ondrop = elData.drgDrop;
         newEl.ondragover = elData.drgOver;
         newEl.ondragend = elData.drgEnd
+        newEl.ondragleave = elData.drgLeave;
     }
     document.querySelector(elData.append).appendChild(newEl);
 };
@@ -25,8 +26,8 @@ let newElDD = function(elData){
 
 let creListItem = function(itemData){
     let newLi = [
-        {type: 'div', class: ['listItem', 'listItem'+itemData.name], append: '.contain'},
-        {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.contain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop, drgEnd: drgEnder, val: itemData.val},
+        {type: 'div', class: ['listItem', 'listItem'+itemData.name], append: '.listContain'},
+        {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.listContain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop, drgEnd: drgEnder, drgLeave: drgLeaver, val: itemData.val},
         {type: 'div', class: ['listItemImgCon', 'listItemImgCon' + itemData.name], append: '.listItemCon' + itemData.name},
         {type: 'div', class: ['listItemImg', 'listItemImg' + itemData.name], append: '.listItemImgCon' + itemData.name, bgImage: itemData.img},
         {type: 'div', class: ['listItemTextCon', 'listItemTextCon' + itemData.name], append: '.listItemCon' + itemData.name},
@@ -52,11 +53,23 @@ function mouseDiv(e){
     e.dataTransfer.setData('text', e.target);
     divSwap.first = e.target.value;
     divSwap.originalDiv = e.target;
-    e.target.style.background = 'gold';
+    e.target.style.background = '#D49A6A';
 }
 
 function allowDrop(e){
     e.preventDefault();
+    if(e.target.classList[0] == 'listItemCon' && e.target.classList[1] != divSwap.originalDiv.classList[1] ){
+        e.target.style.backgroundColor = '#D4EE9F';
+    }
+    else if(e.target.parentElement.classList[0] == 'listItemCon' && e.target.parentElement.classList[1] != divSwap.originalDiv.classList[1] ){
+        e.target.parentElement.style.backgroundColor = '#D4EE9F';
+    }
+    else if(e.target.parentElement.parentElement.classList[0] == 'listItemCon' && e.target.parentElement.parentElement.classList[1] != divSwap.originalDiv.classList[1] ){
+        e.target.parentElement.parentElement.style.backgroundColor = '#D4EE9F';
+    }
+    else if(e.target.parentElement.parentElement.parentElement.classList[0] == 'listItemCon' && e.target.parentElement.parentElement.parentElement.classList[1] != divSwap.originalDiv.classList[1] ){
+        e.target.parentElement.parentElement.parentElement.style.backgroundColor = '#D4EE9F';
+    }
 }
 
 function drgEnder(){
@@ -65,9 +78,18 @@ function drgEnder(){
     }
 }
 
+function drgLeaver(e){
+    if(e.target.classList[0] == 'listItemCon' && e.target.classList[1] != divSwap.originalDiv.classList[1] ){
+        e.target.style.backgroundColor = 'white';
+    }
+}
+
+
+
 function drgDropper(e){
     var data = e.dataTransfer.getData("text");
     let selDiv = e.target;
+    
     while(selDiv.classList[0] != 'listItemCon'){
         selDiv = selDiv.parentElement;
     }
@@ -105,7 +127,7 @@ function reorganizeDivs(){
     divSwap.first = '';
     divSwap.second = '';
     divSwap.originalDiv = '';
-    document.querySelector('.contain').innerHTML = '';
+    document.querySelector('.listContain').innerHTML = '';
     listItemElementData = [];
     creListItemData.map(function(item){
         creListItem(item);
@@ -120,14 +142,20 @@ function reorganizeDivs(){
 let listItemElementData = [];
 
 let elArr = [
-    {type: 'div', class: ['contain'], append: '.ddApp'}
+    
+    {type: 'div', class: ['contain'], append: '.ddApp'},
+    {type: 'div', class: ['titleContain'], append: '.contain'},
+    {type: 'div', class: ['pageTitle'], append: '.titleContain', inHL: 'Rate you favourite Zelda games'},
+    {type: 'div', class: ['listContain'], append: '.contain'}
 ];
 
 
 
 
 (function initApp(){
-    newElDD(elArr[0]);
+    elArr.map(function(item){
+        newElDD(item);
+    })
     creListItemData.map(function(item){
         creListItem(item);
     })
