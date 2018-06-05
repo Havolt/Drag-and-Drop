@@ -1,0 +1,61 @@
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ddApp{
+    text-align: center;
+}
+
+.contain{
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.listItemCon{
+    border: 2px solid green;
+    width: 320px;
+    padding: 16px;
+    user-select: none;
+}
+
+.listItemImgCon{
+    display: inline-block;
+    width: 100px;
+}
+
+.listItemImg{
+    width: 80px;
+    height: 80px;
+    background-size: 120%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #222;
+    border-radius: 50%;
+    border: 1px solid green;
+}
+
+.listItemTextCon{
+    display: inline-block;
+    vertical-align: top;
+    width: 220px;
+}
+
+.listItemTitle{
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.listItemDesc{
+    padding-top: 40px;
+    font-size: 14px;
+}
+
+.listItemConsole{
+    float: left;
+}
+
+.listItemYear{
+    float: right;
+}
