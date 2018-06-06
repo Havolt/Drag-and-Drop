@@ -28,16 +28,18 @@ let elArr = [
 ];
 
 let elArrSecond = [
-    {type: 'div', class: ['resContain'], append: '.ddApp'},
+    {type: 'div', class: ['resMain', 'ddHiddenDis'], append: '.ddApp'},
+    {type: 'div', class: ['resContain'], append: '.resMain'},
     {type: 'div', class: ['resTitleCon'], append: '.resContain'},
-    {type: 'div', class: ['resTitle'], append: '.resTitleCon', inHL: 'Thank you for your feedback, your results are as follows'},
+    {type: 'div', class: ['resTitle'], append: '.resTitleCon', inHL: 'Thank you, your results are as follows:'},
     {type: 'div', class: ['resListCon'], append: '.resContain'},
-    
     {type: 'div', class: ['resListItemCon', 'resListItemConMain' ], append: '.resListCon'},
     {type: 'div', class: ['resListItemNum', 'resListItemGen'], append: '.resListItemConMain', inHL: '#'},
     {type: 'div', class: ['resListItemName', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Name'},
     {type: 'div', class: ['resListItenConsole', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Console:'},
-    {type: 'div', class: ['resListItenYear', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Year:'}
+    {type: 'div', class: ['resListItenYear', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Year:'},
+    {type: 'div', class: ['resButtonCon'], append: '.resMain'},
+    {type: 'div', class: ['resButton'], append: '.resButtonCon', inHL: 'Go Again', evt: {type: 'click', func: startOver}}
 ]
 
 
@@ -90,7 +92,8 @@ let listItemNumber = function(it, ind){
 function finButton(){
     document.querySelector('.contain').classList.add('ddVanish');
     setTimeout(function(){
-        document.querySelector('.contain').classList.add('ddHidden');
+        document.querySelector('.contain').classList.add('ddHiddenDis');
+        document.querySelector('.resMain').classList.remove('ddHiddenDis');
     }, 500)
     creListItemData.map(function(item, ind){
         resultListMaker(item, ind)
@@ -102,10 +105,9 @@ function finButton(){
 }
 
 function resultListMaker(it, ind){
-    console.log(it);
     let tmpArr = [
         {type: 'div', class: ['resListItemCon', 'resListItemCon' + it.name ], append: '.resListCon'},
-        {type: 'div', class: ['resListItemNum', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: ind+'.'},
+        {type: 'div', class: ['resListItemNum', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: (ind+1)+'.'},
         {type: 'div', class: ['resListItemName', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: it.title},
         {type: 'div', class: ['resListItenConsole', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: it.cons},
         {type: 'div', class: ['resListItenYear', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: it.year}
@@ -213,12 +215,51 @@ function reorganizeDivs(){
     })
 }
 
+function startOver(){
+    document.querySelector('.ddApp').innerHTML = '';
+    divSwap = {first : '', second: '', originalDiv : ''};
+
+    creListItemData = [
+        {name: 'LttP', img: 'ba-lttp.jpg', title: 'Link to the Past', cons: 'SNES', year: '1991', val: 1},
+        {name: 'OoT', img: 'ba-oot.jpg', title: 'Ocarina of Time', cons: 'Nintendo 64', year: '1998', val: 2},
+        {name: 'MM', img: 'ba-mm.jpg', title: "Majora's Mask", cons: 'Nintendo 64', year: '2000', val: 3},
+        {name: 'WW', img: 'ba-ww.jpg', title: "Wind Waker", cons: 'Gamecube', year: '2002', val: 4},
+        {name: 'TP', img: 'ba-tp.jpg', title: "Twilight Princess", cons: 'Gamecube/Wii', year: '2006', val: 5},
+        {name: 'SS', img: 'ba-ss.jpg', title: "Skyward Sword", cons: 'Wii', year: '2011', val: 6},
+        {name: 'BotW', img: 'ba-botw.jpeg', title: "Breath of the Wild", cons: 'Wii U/Switch', year: '2017', val: 7}
+    ]
+    listItemElementData = [];
+    elArr = [
+        {type: 'div', class: ['contain'], append: '.ddApp'},
+        {type: 'div', class: ['titleContain'], append: '.contain'},
+        {type: 'div', class: ['pageTitle'], append: '.titleContain', inHL: 'Drag and drop your favourite Zelda titles in order'},
+        {type: 'div', class: ['listContain'], append: '.contain'},
+        {type: 'div', class: ['buttonContain'], append: '.contain'},
+        {type: 'div', class: ['listButton'], append: '.buttonContain', inHL: 'Finished', evt: {type: 'click', func: finButton}}
+    ];
+    elArrSecond = [
+        {type: 'div', class: ['resMain', 'ddHiddenDis'], append: '.ddApp'},
+        {type: 'div', class: ['resContain'], append: '.resMain'},
+        {type: 'div', class: ['resTitleCon'], append: '.resContain'},
+        {type: 'div', class: ['resTitle'], append: '.resTitleCon', inHL: 'Thank you, your results are as follows:'},
+        {type: 'div', class: ['resListCon'], append: '.resContain'},
+        {type: 'div', class: ['resListItemCon', 'resListItemConMain' ], append: '.resListCon'},
+        {type: 'div', class: ['resListItemNum', 'resListItemGen'], append: '.resListItemConMain', inHL: '#'},
+        {type: 'div', class: ['resListItemName', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Name'},
+        {type: 'div', class: ['resListItenConsole', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Console:'},
+        {type: 'div', class: ['resListItenYear', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Year:'},
+        {type: 'div', class: ['resButtonCon'], append: '.resMain'},
+        {type: 'div', class: ['resButton'], append: '.resButtonCon', inHL: 'Go Again', evt: {type: 'click', func: startOver}}
+    ]
+    initApp();
+}
+
 
         //// Initializing app self calling function ////
 
 
 
-(function initApp(){
+function initApp(){
     elArr.map(function(item){
         newElDD(item);
     })
@@ -232,7 +273,9 @@ function reorganizeDivs(){
         })
         
     })
-})()
+}
+
+initApp()   
 
 
 

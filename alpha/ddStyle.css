@@ -118,9 +118,7 @@ body{
     float: right;
 }
 
-.ddHidden{
-    opacity: 0.0;
-}
+
 
 .buttonContain{
     margin: 10px 0;
@@ -138,21 +136,20 @@ body{
     background-color: #116611;
 }
 
-.ddVanish{
-    opacity: 0;
-    transition: opacity 0.5s;
-}
 
-.ddHidden{
-    display: none;
-}
 
 .resContain{
     width: 540px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.resTitle{
+    font-size: 26px;
 }
 
 .resListItemCon{
-    border: 1px solid black;
+    border-top: 1px solid black;
     padding: 3px 0;
 }
 
@@ -162,7 +159,7 @@ body{
 
 .resListItemGen {
     display: inline-block;
-    width: 30%;
+    width: 25%;
 }
 
 .resListItemGen > div:nth-child(1){
@@ -170,10 +167,39 @@ body{
 }
 
 .resListItemNum{
-    width: 5%;
+    width: 10%;
     text-align: right;
 }
 
 .resListItemName{
-    width: 35%;
+    width: 40%;
+}
+
+.resButton{
+    background: #AA3939;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 22px;
+    margin-top: 5px;
+    box-shadow: 0 0 2px black;
+}
+
+.resButton:hover{
+    cursor: pointer;
+    background: #801515;
+}
+
+.ddVanish{
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.ddHidden{
+    opacity: 0.0;
+}
+
+.ddHiddenDis{
+    display: none;
 }
