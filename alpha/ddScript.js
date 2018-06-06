@@ -1,5 +1,33 @@
 
-let divSwap = {first : '', second: '', originalDiv : ''}
+
+        //// Data arrays and objects ////
+
+
+let divSwap = {first : '', second: '', originalDiv : ''};
+
+
+let creListItemData = [
+    {name: 'LttP', img: 'ba-lttp.jpg', title: 'Link to the Past', cons: 'SNES', year: '1991', val: 1},
+    {name: 'OoT', img: 'ba-oot.jpg', title: 'Ocarina of Time', cons: 'Nintendo 64', year: '1998', val: 2},
+    {name: 'MM', img: 'ba-mm.jpg', title: "Majora's Mask", cons: 'Nintendo 64', year: '2000', val: 3},
+    {name: 'WW', img: 'ba-ww.jpg', title: "Wind Waker", cons: 'Gamecube', year: '2002', val: 4},
+    {name: 'TP', img: 'ba-tp.jpg', title: "Twilight Princess", cons: 'Gamecube/Wii', year: '2006', val: 5},
+    {name: 'SS', img: 'ba-ss.jpg', title: "Skyward Sword", cons: 'Wii', year: '2011', val: 6},
+    {name: 'BotW', img: 'ba-botw.jpeg', title: "Breath of the Wild", cons: 'Wii U/Switch', year: '2017', val: 7}
+]
+
+let listItemElementData = [];
+
+let elArr = [
+    
+    {type: 'div', class: ['contain'], append: '.ddApp'},
+    {type: 'div', class: ['titleContain'], append: '.contain'},
+    {type: 'div', class: ['pageTitle'], append: '.titleContain', inHL: 'Rate you favourite Zelda games'},
+    {type: 'div', class: ['listContain'], append: '.contain'}
+];
+
+
+        //// Function used to create elements ////
 
 
 let newElDD = function(elData){
@@ -28,6 +56,8 @@ let creListItem = function(itemData){
     let newLi = [
         {type: 'div', class: ['listItem', 'listItem'+itemData.name], append: '.listContain'},
         {type: 'div', class: ['listItemCon', 'listItemCon'+itemData.name], append: '.listContain', evt: {type: 'click', func: mouseDiv}, drg: true, drgStart: mouseDiv, drgDrop: drgDropper, drgOver: allowDrop, drgEnd: drgEnder, drgLeave: drgLeaver, val: itemData.val},
+        {type: 'div', class: ['listItemNumCon', 'listItemNumCon'+itemData.name], append: '.listItemCon'+itemData.name},
+        {type: 'div', class: ['listItemNum', 'listItemNum'+itemData.name], append: '.listItemNumCon'+itemData.name, inHL: 'dog'},
         {type: 'div', class: ['listItemImgCon', 'listItemImgCon' + itemData.name], append: '.listItemCon' + itemData.name},
         {type: 'div', class: ['listItemImg', 'listItemImg' + itemData.name], append: '.listItemImgCon' + itemData.name, bgImage: itemData.img},
         {type: 'div', class: ['listItemTextCon', 'listItemTextCon' + itemData.name], append: '.listItemCon' + itemData.name},
@@ -39,15 +69,16 @@ let creListItem = function(itemData){
     listItemElementData.push(newLi);
 }
 
-let creListItemData = [
-    {name: 'LttP', img: 'ba-lttp.jpg', title: 'Link to the Past', cons: 'SNES', year: '1991', val: 1},
-    {name: 'OoT', img: 'ba-oot.jpg', title: 'Ocarina of Time', cons: 'Nintendo 64', year: '1998', val: 2},
-    {name: 'MM', img: 'ba-mm.jpg', title: "Majora's Mask", cons: 'Nintendo 64', year: '2000', val: 3},
-    {name: 'WW', img: 'ba-ww.jpg', title: "Wind Waker", cons: 'Gamecube', year: '2002', val: 4},
-    {name: 'TP', img: 'ba-tp.jpg', title: "Twilight Princess", cons: 'Gamecube/Wii', year: '2006', val: 5},
-    {name: 'SS', img: 'ba-ss.jpg', title: "Skyward Sword", cons: 'Wii', year: '2011', val: 6},
-    {name: 'BotW', img: 'ba-botw.jpeg', title: "Breath of the Wild", cons: 'Wii U/Switch', year: '2017', val: 7}
-]
+let listItemNumber = function(it, ind){
+    console.log(it[3].inHL);
+    it[3].inHL = ind + '.';
+    console.log(it[3].inHL);
+}
+
+
+
+
+        //// Drag and Drop functions ////
 
 function mouseDiv(e){
     e.dataTransfer.setData('text', e.target);
@@ -132,23 +163,16 @@ function reorganizeDivs(){
     creListItemData.map(function(item){
         creListItem(item);
     })
-    listItemElementData.map(function(item){
+    listItemElementData.map(function(item, index1){
+        listItemNumber(item, index1+1);
         item.map(function(item2){
             newElDD(item2);
         })
     })
 }
 
-let listItemElementData = [];
 
-let elArr = [
-    
-    {type: 'div', class: ['contain'], append: '.ddApp'},
-    {type: 'div', class: ['titleContain'], append: '.contain'},
-    {type: 'div', class: ['pageTitle'], append: '.titleContain', inHL: 'Rate you favourite Zelda games'},
-    {type: 'div', class: ['listContain'], append: '.contain'}
-];
-
+        //// Initializing app self calling function ////
 
 
 
@@ -159,10 +183,12 @@ let elArr = [
     creListItemData.map(function(item){
         creListItem(item);
     })
-    listItemElementData.map(function(item){
+    listItemElementData.map(function(item, index1){
+        listItemNumber(item, index1+1);
         item.map(function(item2){
             newElDD(item2);
         })
+        
     })
 })()
 

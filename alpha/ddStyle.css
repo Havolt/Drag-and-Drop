@@ -27,7 +27,7 @@ body{
 
 .listItemCon{
     border: 2px solid #A5C663;
-    width: 340px;
+    width: 380px;
     padding: 16px;
     user-select: none;
     margin: 4px 0;
@@ -39,9 +39,17 @@ body{
     cursor: pointer;
 }
 
+.listItemNumCon{
+    display: inline-block;
+    vertical-align: 140%;
+    padding: 0 20px 0 2px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .listItemImgCon{
     display: inline-block;
-    width: 100px;
+    width: 94px;
 }
 
 .listItemImg{
@@ -55,6 +63,11 @@ body{
     border: 1px solid green;
 }
 
+.listItemImgLttP{
+    background-size: 135%;
+    background-position-x: -10px;
+}
+
 .listItemImgOoT{
     background-size: 150%;
     background-position-x: -15px;
@@ -65,10 +78,23 @@ body{
     background-position-x: -20px;
 }
 
+.listItemImgWW{
+    background-position-y: -20px;
+}
+
+.listItemImgSS{
+    background-position-y: -45px;
+}
+
+.listItemImgBotW{
+    background-position-y: -52px;
+}
+
+
 .listItemTextCon{
     display: inline-block;
     vertical-align: top;
-    width: 240px;
+    width: 230px;
 }
 
 .listItemTitle{
