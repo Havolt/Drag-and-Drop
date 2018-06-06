@@ -18,9 +18,9 @@ body{
 }
 
 .pageTitle{
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
-    padding: 6px 0;
+    padding: 12px 0;
     color: white;
     text-shadow: 0 0 1px #888;
 }
@@ -98,14 +98,16 @@ body{
 }
 
 .listItemTitle{
+    padding-top: 10px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
 }
 
 .listItemDesc{
     padding-top: 40px;
     font-size: 14px;
+    color: #444;
 }
 
 .listItemConsole{
@@ -118,4 +120,29 @@ body{
 
 .ddHidden{
     opacity: 0.0;
+}
+
+.buttonContain{
+    margin: 10px 0;
+    font-size: 38px;
+    background: #2D882D;
+    color: white;
+    display: inline-block;
+    padding:  5px 15px;
+    border-radius: 4px;
+    box-shadow: 0 0px 3px white;
+}
+
+.buttonContain:hover{
+    cursor: pointer;
+    background-color: #116611;
+}
+
+.ddVanish{
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.ddHidden{
+    display: none;
 }

@@ -19,11 +19,12 @@ let creListItemData = [
 let listItemElementData = [];
 
 let elArr = [
-    
     {type: 'div', class: ['contain'], append: '.ddApp'},
     {type: 'div', class: ['titleContain'], append: '.contain'},
-    {type: 'div', class: ['pageTitle'], append: '.titleContain', inHL: 'Rate you favourite Zelda games'},
-    {type: 'div', class: ['listContain'], append: '.contain'}
+    {type: 'div', class: ['pageTitle'], append: '.titleContain', inHL: 'Drag and drop your favourite Zelda titles in order'},
+    {type: 'div', class: ['listContain'], append: '.contain'},
+    {type: 'div', class: ['buttonContain'], append: '.contain'},
+    {type: 'div', class: ['listButton'], append: '.buttonContain', inHL: 'Finished', evt: {type: 'click', func: finButton}}
 ];
 
 
@@ -70,9 +71,14 @@ let creListItem = function(itemData){
 }
 
 let listItemNumber = function(it, ind){
-    console.log(it[3].inHL);
     it[3].inHL = ind + '.';
-    console.log(it[3].inHL);
+}
+
+function finButton(){
+    document.querySelector('.contain').classList.add('ddVanish');
+    setTimeout(function(){
+        document.querySelector('.contain').classList.add('ddHidden');
+    }, 500)
 }
 
 
@@ -81,10 +87,12 @@ let listItemNumber = function(it, ind){
         //// Drag and Drop functions ////
 
 function mouseDiv(e){
-    e.dataTransfer.setData('text', e.target);
-    divSwap.first = e.target.value;
-    divSwap.originalDiv = e.target;
-    e.target.style.background = '#D49A6A';
+    if(e.dataTransfer){
+        e.dataTransfer.setData('text', e.target);
+        divSwap.first = e.target.value;
+        divSwap.originalDiv = e.target;
+        e.target.style.background = '#D49A6A';
+    }
 }
 
 function allowDrop(e){
