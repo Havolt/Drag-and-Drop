@@ -1,0 +1,205 @@
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f7f7;
+}
+
+.ddApp{
+    text-align: center;
+}
+
+.contain{
+    margin: 0 auto;
+    display: inline-block;
+    border: #801515 2px solid;
+    padding: 6px;
+    background: #669999;
+    border-radius: 5px;
+}
+
+.pageTitle{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 0;
+    color: white;
+    text-shadow: 0 0 1px #888;
+}
+
+.listItemCon{
+    border: 2px solid #A5C663;
+    width: 380px;
+    padding: 16px;
+    user-select: none;
+    margin: 4px 0;
+    background: white;
+    border-radius: 4px;
+}
+
+.listItemCon:hover{
+    cursor: pointer;
+}
+
+.listItemNumCon{
+    display: inline-block;
+    vertical-align: 140%;
+    padding: 0 20px 0 2px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.listItemImgCon{
+    display: inline-block;
+    width: 94px;
+}
+
+.listItemImg{
+    width: 80px;
+    height: 80px;
+    background-size: 120%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #222;
+    border-radius: 50%;
+    border: 1px solid green;
+}
+
+.listItemImgLttP{
+    background-size: 135%;
+    background-position-x: -10px;
+}
+
+.listItemImgOoT{
+    background-size: 150%;
+    background-position-x: -15px;
+}
+
+.listItemImgMM{
+    background-size: 150%;
+    background-position-x: -20px;
+}
+
+.listItemImgWW{
+    background-position-y: -20px;
+}
+
+.listItemImgSS{
+    background-position-y: -45px;
+}
+
+.listItemImgBotW{
+    background-position-y: -52px;
+}
+
+
+.listItemTextCon{
+    display: inline-block;
+    vertical-align: top;
+    width: 230px;
+}
+
+.listItemTitle{
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+}
+
+.listItemDesc{
+    padding-top: 40px;
+    font-size: 14px;
+    color: #444;
+}
+
+.listItemConsole{
+    float: left;
+}
+
+.listItemYear{
+    float: right;
+}
+
+
+
+.buttonContain{
+    margin: 10px 0;
+    font-size: 38px;
+    background: #2D882D;
+    color: white;
+    display: inline-block;
+    padding:  5px 15px;
+    border-radius: 4px;
+    box-shadow: 0 0px 3px white;
+}
+
+.buttonContain:hover{
+    cursor: pointer;
+    background-color: #116611;
+}
+
+
+
+.resContain{
+    width: 540px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.resTitle{
+    font-size: 26px;
+}
+
+.resListItemCon{
+    border-top: 1px solid black;
+    padding: 3px 0;
+}
+
+.resListItemConMain{
+    font-weight: bold;
+}
+
+.resListItemGen {
+    display: inline-block;
+    width: 25%;
+}
+
+.resListItemGen > div:nth-child(1){
+    font-weight: bold;
+}
+
+.resListItemNum{
+    width: 10%;
+    text-align: right;
+}
+
+.resListItemName{
+    width: 40%;
+}
+
+.resButton{
+    background: #AA3939;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 22px;
+    margin-top: 5px;
+    box-shadow: 0 0 2px black;
+}
+
+.resButton:hover{
+    cursor: pointer;
+    background: #801515;
+}
+
+.ddVanish{
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.ddHidden{
+    opacity: 0.0;
+}
+
+.ddHiddenDis{
+    display: none;
+}
