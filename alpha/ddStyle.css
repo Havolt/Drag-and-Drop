@@ -146,3 +146,34 @@ body{
 .ddHidden{
     display: none;
 }
+
+.resContain{
+    width: 540px;
+}
+
+.resListItemCon{
+    border: 1px solid black;
+    padding: 3px 0;
+}
+
+.resListItemConMain{
+    font-weight: bold;
+}
+
+.resListItemGen {
+    display: inline-block;
+    width: 30%;
+}
+
+.resListItemGen > div:nth-child(1){
+    font-weight: bold;
+}
+
+.resListItemNum{
+    width: 5%;
+    text-align: right;
+}
+
+.resListItemName{
+    width: 35%;
+}

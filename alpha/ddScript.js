@@ -27,6 +27,19 @@ let elArr = [
     {type: 'div', class: ['listButton'], append: '.buttonContain', inHL: 'Finished', evt: {type: 'click', func: finButton}}
 ];
 
+let elArrSecond = [
+    {type: 'div', class: ['resContain'], append: '.ddApp'},
+    {type: 'div', class: ['resTitleCon'], append: '.resContain'},
+    {type: 'div', class: ['resTitle'], append: '.resTitleCon', inHL: 'Thank you for your feedback, your results are as follows'},
+    {type: 'div', class: ['resListCon'], append: '.resContain'},
+    
+    {type: 'div', class: ['resListItemCon', 'resListItemConMain' ], append: '.resListCon'},
+    {type: 'div', class: ['resListItemNum', 'resListItemGen'], append: '.resListItemConMain', inHL: '#'},
+    {type: 'div', class: ['resListItemName', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Name'},
+    {type: 'div', class: ['resListItenConsole', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Console:'},
+    {type: 'div', class: ['resListItenYear', 'resListItemGen'], append: '.resListItemConMain', inHL: 'Year:'}
+]
+
 
         //// Function used to create elements ////
 
@@ -79,6 +92,27 @@ function finButton(){
     setTimeout(function(){
         document.querySelector('.contain').classList.add('ddHidden');
     }, 500)
+    creListItemData.map(function(item, ind){
+        resultListMaker(item, ind)
+    })
+    elArrSecond.map(function(item){
+        newElDD(item);
+    })
+    
+}
+
+function resultListMaker(it, ind){
+    console.log(it);
+    let tmpArr = [
+        {type: 'div', class: ['resListItemCon', 'resListItemCon' + it.name ], append: '.resListCon'},
+        {type: 'div', class: ['resListItemNum', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: ind+'.'},
+        {type: 'div', class: ['resListItemName', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: it.title},
+        {type: 'div', class: ['resListItenConsole', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: it.cons},
+        {type: 'div', class: ['resListItenYear', 'resListItemGen'], append: '.resListItemCon' + it.name, inHL: it.year}
+    ]
+    tmpArr.map(function(ite){
+        elArrSecond.push(ite);
+    })
 }
 
 
