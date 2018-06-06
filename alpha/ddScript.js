@@ -123,6 +123,9 @@ function resultListMaker(it, ind){
         //// Drag and Drop functions ////
 
 function mouseDiv(e){
+    
+    divSwap.first = e.target.value;
+    divSwap.originalDiv = e.target;
     if(e.dataTransfer){
         e.dataTransfer.setData('text', e.target);
         divSwap.first = e.target.value;
@@ -151,6 +154,9 @@ function drgEnder(){
     if(divSwap.originalDiv){
         divSwap.originalDiv.style.backgroundColor = 'white';
     }
+    divSwap.first = '';
+    divSwap.second = '';
+    divSwap.originalDiv = '';
 }
 
 function drgLeaver(e){
@@ -170,9 +176,6 @@ function drgDropper(e){
     }
     divSwap.second = selDiv.value;
     if(divSwap.first == divSwap.second){
-        divSwap.first = '';
-        divSwap.second = '';
-        divSwap.originalDiv = '';
         return;
     }
     reorganizeDivs();
